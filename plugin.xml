@@ -20,8 +20,10 @@
     
     <platform name="android">
 		<config-file target="res/xml/config.xml" parent="/*">
-            <feature name="VideoPlayer" >
+          <preference name="webView" value="com.simplec.phonegap.plugins.otaupdater.SimpleCOTAWebviewEngine" />
+            <feature name="OTAUpdater" >
                 <param name="android-package" value="com.simplec.phonegap.plugins.otaupdater.OTAUpdater"/>
+            	<param name="onload" value="true" />
             </feature>
         </config-file>
 		
@@ -30,6 +32,7 @@
         </config-file>
         
 	    <source-file src="src/android/com/simplec/phonegap/plugins/otaupdater/OTAUpdater.java" target-dir="src/com/simplec/phonegap/plugins/otaupdater"/>
+	    <source-file src="src/android/com/simplec/phonegap/plugins/otaupdater/SimpleCOTAWebviewEngine.java" target-dir="src/com/simplec/phonegap/plugins/otaupdater"/>
 	</platform>
     
 </plugin>
