@@ -36,7 +36,7 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	public void loadUrl(String url, boolean clearNavigationStack) {
 		String newUrl = url;
 		if (url.startsWith("file:///android_asset/www/index.html")) {
-			newUrl = "file:///android_asset/www/error.html";
+			//newUrl = "file:///android_asset/www/error.html";
 		}
 		
 		Log.d(LOG_TAG, "navigation to URL: "+newUrl);
