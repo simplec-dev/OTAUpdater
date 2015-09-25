@@ -89,7 +89,6 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	}
 	
 	private void listAssetFiles(String path, List<String> files) {
-
 	    String [] list;
 	    try {
 	        list = cordova.getActivity().getAssets().list(path);
@@ -97,11 +96,11 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	            // This is a folder
 	            for (String file : list) {
 	            	String s = path;
-	            	if (path.length()>0) {
-	            		path += "/";
+	            	if (s.length()>0) {
+	            		s += "/";
 	            	}
-		        	files.add(path+"/"+file);
-	            	listAssetFiles(path + "/" + file, files);
+		        	files.add(s+file);
+	            	listAssetFiles(s+ file, files);
 	            }
 	        }
 	    } catch (IOException e) {
