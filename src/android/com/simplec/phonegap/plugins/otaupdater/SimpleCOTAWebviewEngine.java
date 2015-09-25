@@ -40,9 +40,11 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	public void loadUrl(String url, boolean clearNavigationStack) {
 		String[] f;
 		try {
+		    Log.v(LOG_TAG, "getting names");
 			f = cordova.getActivity().getAssets().list("");
+		    Log.v(LOG_TAG, "names.length: "+f.length);
 			for(String f1 : f){
-			    Log.v("names: ",f1);
+			    Log.v(LOG_TAG, "names: " + f1);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
