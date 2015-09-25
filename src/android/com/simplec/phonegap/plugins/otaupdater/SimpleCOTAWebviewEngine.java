@@ -88,7 +88,7 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 		return uriString;
 	}
 	
-	private boolean listAssetFiles(String path, List<String> files) {
+	private void listAssetFiles(String path, List<String> files) {
 
 	    String [] list;
 	    try {
@@ -96,16 +96,11 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	        if (list.length > 0) {
 	            // This is a folder
 	            for (String file : list) {
-	                if (!listAssetFiles(path + "/" + file, files))
-	                    return false;
+		        	files.add(path);
+	            	listAssetFiles(path + "/" + file, files);
 	            }
-	        } else {
-	        	files.add(path);
 	        }
 	    } catch (IOException e) {
-	        return false;
 	    }
-
-	    return true; 
 	} 
 }
