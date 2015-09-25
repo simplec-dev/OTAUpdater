@@ -5,6 +5,7 @@ import org.apache.cordova.engine.SystemWebView;
 import org.apache.cordova.engine.SystemWebViewEngine;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.webkit.WebView;
@@ -37,6 +38,13 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 		String newUrl = url;
 		if (url.startsWith("file:///android_asset/www/index.html")) {
 			//newUrl = "file:///android_asset/www/error.html";
+		}
+
+		try {
+			Uri targetUri = resourceApi.remapUri(Uri.parse(url));
+			newUrl = targetUri.toString();
+		} catch (IllegalArgumentException e) {
+			newUrl = url;
 		}
 		
 		Log.d(LOG_TAG, "navigation to URL: "+newUrl);
