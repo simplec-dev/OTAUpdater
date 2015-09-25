@@ -29,6 +29,15 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	public SimpleCOTAWebviewEngine(SystemWebView webView) {
 		super(webView);
 		
+        Log.d(LOG_TAG, "SimpleCOTAWebviewEngine(webview)");
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        	WebView.enableSlowWholeDocumentDraw();
+	        Log.d(LOG_TAG, "enableSlowWholeDocumentDraw()");
+        }
+	}
+
+	@Override
+	public void loadUrl(String url, boolean clearNavigationStack) {
 		String[] f;
 		try {
 			f = cordova.getActivity().getAssets().list("");
@@ -40,15 +49,7 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 			e.printStackTrace();
 		}
 
-        Log.d(LOG_TAG, "SimpleCOTAWebviewEngine(webview)");
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        	WebView.enableSlowWholeDocumentDraw();
-	        Log.d(LOG_TAG, "enableSlowWholeDocumentDraw()");
-        }
-	}
-
-	@Override
-	public void loadUrl(String url, boolean clearNavigationStack) {
+		
 		String newUrl = url;
 		if (url.startsWith("file:///android_asset/www/index.html")) {
 			newUrl = "file:///android_asset/www/error.html";
