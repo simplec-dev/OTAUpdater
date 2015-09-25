@@ -96,7 +96,7 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	        if (list.length > 0) {
 	            // This is a folder
 	            for (String file : list) {
-		        	files.add(path);
+		        	files.add(path+"/"+file);
 	            	listAssetFiles(path + "/" + file, files);
 	            }
 	        }
