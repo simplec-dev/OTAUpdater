@@ -1,6 +1,8 @@
 package com.simplec.phonegap.plugins.otaupdater;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.cordova.CordovaPreferences;
 import org.apache.cordova.engine.SystemWebView;
@@ -38,18 +40,13 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 
 	@Override
 	public void loadUrl(String url, boolean clearNavigationStack) {
-		String[] f;
-		try {
+		
 		    Log.v(LOG_TAG, "getting names");
-			f = cordova.getActivity().getAssets().list("");
-		    Log.v(LOG_TAG, "names.length: "+f.length);
+		    List<String> f = new ArrayList<String>();
+		    listAssetFiles("", f);
 			for(String f1 : f){
 			    Log.v(LOG_TAG, "names: " + f1);
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		
 		String newUrl = url;
@@ -90,4 +87,25 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 		}
 		return uriString;
 	}
+	
+	private boolean listAssetFiles(String path, List<String> files) {
+
+	    String [] list;
+	    try {
+	        list = cordova.getActivity().getAssets().list(path);
+	        if (list.length > 0) {
+	            // This is a folder
+	            for (String file : list) {
+	                if (!listAssetFiles(path + "/" + file, files))
+	                    return false;
+	            }
+	        } else {
+	        	files.add(path);
+	        }
+	    } catch (IOException e) {
+	        return false;
+	    }
+
+	    return true; 
+	} 
 }
