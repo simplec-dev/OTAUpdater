@@ -89,6 +89,7 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	}
 	
 	private void listAssetFiles(String path, List<String> files) {
+		Log.v(LOG_TAG, "getting: " + path);
 	    String [] list;
 	    try {
 	        list = cordova.getActivity().getAssets().list(path);
@@ -99,8 +100,9 @@ public class SimpleCOTAWebviewEngine extends SystemWebViewEngine {
 	            	if (s.length()>0) {
 	            		s += "/";
 	            	}
-		        	files.add(s+file);
-	            	listAssetFiles(s+ file, files);
+	            	s+=file;
+		        	files.add(s);
+	            	listAssetFiles(s, files);
 	            }
 	        }
 	    } catch (IOException e) {
